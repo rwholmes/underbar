@@ -150,7 +150,26 @@ var _ = { };
 
   // Calls the method named by methodName on each value in the list.
   // Note: you will nead to learn a bit about .apply to complete this.
+  // some helpers
+
+  // Working Version with ternary operator
+  _.invoke1 = function(collection, functionOrKey, args) {
+    var isFunc = typeof functionOrKey === 'function';
+    return _.map(collection, function(value) {
+      return (isFunc ? functionOrKey : value[functionOrKey]).apply(value, args);
+    });
+  };
+  // Version with if/else statement
   _.invoke = function(collection, functionOrKey, args) {
+    var isFunc = typeof functionOrKey === 'function';
+    return _.map(collection, function(value) {
+      if (isFunc) {
+        return functionOrKey.apply(value,args);
+      }
+      else {
+        return value[functionOrKey].apply(value, args);
+      }
+    });
   };
 
   // Reduces an array or object to a single value by repetitively calling
