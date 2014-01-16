@@ -111,19 +111,19 @@ var _ = { };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
-    var newarr = [];
+    var nodups = [];
     for (var i=0; i<array.length; i++) {
-      var dup = false;
-      for (var k=0; k<newarr.length; k++) {
-        if (array[i] === newarr[k]) {
-          dup = true;
+      var isdup = false;
+      for (var k=0; k<nodups.length; k++) {
+        if (array[i] === nodups[k]) {
+          isdup = true;
         }
       }
-      if (dup == false) {
-        newarr.push(array[i]);
+      if (isdup == false) {
+        nodups.push(array[i]);
       }
     }
-    return newarr;
+    return nodups;
   };
 
   // Return the results of applying an iterator to each element.
