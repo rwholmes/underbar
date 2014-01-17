@@ -128,7 +128,7 @@ var _ = { };
   };
 
   // Return the results of applying an iterator to each element.
-  _.map = function(array, iterator) {
+  _.map1 = function(array, iterator) {
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
@@ -136,6 +136,17 @@ var _ = { };
     for (var i=0; i<array.length; i++) {
       outputarr.push(iterator(array[i]));
     }
+    return outputarr;
+  };
+  // Second version of _.map using _.each
+   _.map = function(array, iterator) {
+    // map() is a useful primitive iteration function that works a lot
+    // like each(), but in addition to running the operation on all
+    // the members, it also maintains an array of results.
+    var outputarr = [];
+    _.each(array, function(item) {
+      outputarr.push(iterator(item));
+    });
     return outputarr;
   };
 
