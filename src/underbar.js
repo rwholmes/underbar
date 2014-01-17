@@ -95,11 +95,11 @@ var _ = { };
   // Version 1 Using code from _.filter
   _.reject1 = function(collection, test) {
     var answers = [];
-    for (var i=0; i<collection.length; i++) {
-      if (!test(collection[i])) {
-        answers.push(collection[i]);
+    _.each(collection, function(item) {
+      if (!test(item)) {
+        answers.push(item);
       }
-    }
+    });
     return answers;
   };
   // Version 2 Using _.filter function
@@ -110,19 +110,20 @@ var _ = { };
   }
 
   // Produce a duplicate-free version of the array.
+  // New version using _.each instead of for loop
   _.uniq = function(array) {
     var nodups = [];
-    for (var i=0; i<array.length; i++) {
+    _.each(array, function(x) {
       var isdup = false;
-      for (var k=0; k<nodups.length; k++) {
-        if (array[i] === nodups[k]) {
+      _.each(nodups, function(y) {
+        if (x === y) {
           isdup = true;
         }
+      });
+      if (isdup === false) {
+        nodups.push(x);
       }
-      if (isdup == false) {
-        nodups.push(array[i]);
-      }
-    }
+    });
     return nodups;
   };
 
