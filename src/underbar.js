@@ -244,7 +244,7 @@ var _ = { };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
-  _.some = function(collection, iterator) {
+  _.some1 = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
     return _.reduce(collection, function(preval, item) {
       if ( preval ) {
@@ -258,6 +258,18 @@ var _ = { };
         return Boolean(iterator(item));
       }
     }, false); 
+  };
+  // Second solution that uses every()
+  _.some = function(collection, iterator) {
+    // TIP: There's a very clever way to re-use every() here.
+    return !(_.every(collection, function(item) {
+      if (iterator === undefined) {
+        return !item;
+      }
+      else {
+        return !iterator(item);
+      }
+    }));
   };
 
 
