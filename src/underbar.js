@@ -198,16 +198,16 @@ var _ = { };
   //   }, 0); // should be 6
   _.reduce = function(collection, iterator, accumulator) {
     if (accumulator === undefined) {
-      var prevalue = collection[0];
-      for (var i=1; i<collection.length; i++) {
-        prevalue = iterator(prevalue, collection[i]);
-      }
+      var prevalue = collection.shift();
+      _.each(collection, function(item) {
+        prevalue = iterator(prevalue, item);
+      });
     }
     else {
       var prevalue = accumulator;
-      for (var i=0; i<collection.length; i++) {
-        prevalue = iterator(prevalue, collection[i]);
-      }
+      _.each(collection, function(item) {
+        prevalue = iterator(prevalue, item);
+      });
     }
     return prevalue;
   };
