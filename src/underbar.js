@@ -332,7 +332,6 @@ var _ = { };
     // time it's called.
     var alreadyCalled = false;
     var result;
-
     // TIP: We'll return a new function that delegates to the old one, but only
     // if it hasn't been called before.
     return function() {
@@ -347,13 +346,23 @@ var _ = { };
     };
   };
 
-  // Memoize an expensive function by storing its results. You may assume
+  // Memorize an expensive function by storing its results. You may assume
   // that the function takes only one argument and that it is a primitive.
   //
   // _.memoize should return a function that when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var resobj = {};
+    return function() {
+      var key = _.identity.apply(this, arguments);
+      if (resobj[key] !== undefined) {
+        return resobj[key];
+      }
+      else {
+        return resobj[key] = func.apply(this, arguments);
+      }
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
