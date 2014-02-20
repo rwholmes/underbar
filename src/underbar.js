@@ -396,7 +396,7 @@ var _ = { };
     // Need to use Math to randomize
     var tempValue;
     var randomIndex;
-    for (var i = copied.length-1; i >0; i--) {
+    for (var i = copied.length-1; i > 0; i--) {
       randomIndex = Math.floor(Math.random() * (i+1));
       tempValue = copied[i];
       copied[i] = copied[randomIndex];
@@ -417,6 +417,7 @@ var _ = { };
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+
   };
 
   // Zip together two or more arrays with elements of the same index
@@ -425,6 +426,28 @@ var _ = { };
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
+    var args = Array.prototype.slice.call(arguments);
+    var argscop = args.slice();
+    var results = [];
+    // Find the longest array out of the inputs
+    var longest = _.reduce(argscop, function(a,b) {
+      if (a.length > b.length) {
+        return a;
+      }
+      else {
+        return b;
+      }
+    });
+    // Loop through the number of indexes of the longest array
+    for (var i=0; i<longest.length; i++) {
+      var toBeZipped = [];
+      // Loop through all of the inputs
+      for (var k=0; k<args.length; k++) {
+        toBeZipped.push(args[k][i]);
+      }
+      results.push(toBeZipped);
+    }
+    return results;
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
