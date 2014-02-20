@@ -431,12 +431,7 @@ var _ = { };
     var results = [];
     // Find the longest array out of the inputs
     var longest = _.reduce(argscop, function(a,b) {
-      if (a.length > b.length) {
-        return a;
-      }
-      else {
-        return b;
-      }
+      return (a.length > b.length) ? a : b;
     });
     // Loop through the number of indexes of the longest array
     for (var i=0; i<longest.length; i++) {
