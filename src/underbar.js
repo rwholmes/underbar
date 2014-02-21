@@ -466,7 +466,16 @@ var _ = { };
 
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
-  _.intersection = function() {
+  _.intersection = function(array) {
+    var otherArrays = Array.prototype.slice.call(arguments, 1);
+    // Filter will return all of the elements in 1st array that pass a truth test
+    return _.filter(_.uniq(array), function(item) {
+      // Not that item here is a value from the first array
+      // The truth test will pass if ALL the other arrays contain that value
+      return _.every(otherArrays, function(oneArray) {
+        return _.indexOf(oneArray, item) >=0;
+      });
+    });
   };
 
   // Take the difference between one array and a number of other arrays.
