@@ -481,6 +481,14 @@ var _ = { };
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    var otherArrays = Array.prototype.slice.call(arguments, 1);
+    // Filter will return all of the elements in 1st array that pass truth function
+    return _.filter(array, function(item) {
+      // Here we want our truth function to be that the values aren't in the other arrays
+      return _.every(otherArrays, function(oneArray) {
+        return _.indexOf(oneArray, item) === -1;
+      });
+    });
   };
 
 
